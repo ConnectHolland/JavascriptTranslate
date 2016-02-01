@@ -1,0 +1,12 @@
+{
+    "name": "connectholland-translate",
+    "version": "0.0.1",
+    "description": "Makes translating values in javascript easy",
+    "license" : "MIT",
+    "dependencies": {
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/ConnectHolland/JavascriptTranslate.git"
+    }
+}
