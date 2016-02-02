@@ -1,65 +1,79 @@
 /**
  * Object to hold translations and perform translations
  */
-if(typeof(Translate)=="undefined"){
-    var Translate = {
-        /**
-         * The loaded translations
-         *
-         * @type Object
-         */
-        _translations: {
-        },
+var Translate = {
+    /**
+     * The loaded translations
+     *
+     * @type Object
+     */
+    _translations: {
+    },
 
-        /**
-         * The language selected
-         *
-         * @type String
-         */
-        _currentLanguage: 'en_US',
+    /**
+     * Fallback when language is unavailable
+     *
+     * @type String
+     */
+    _defaultLanguage: 'en_US',
 
-        /**
-         * Select a language
-         *
-         * @param string language
-         * @returns void
-         */
-        setLanguage: function(language) {
-            Translate._currentLanguage = language;
-        },
+    /**
+     * The language selected
+     *
+     * @type String
+     */
+    _currentLanguage: 'en_US',
 
-        /**
-         * Add a language specification
-         *
-         * @param string language
-         * @param Object translations
-         * @param string domain
-         * @returns void
-         */
-        addLanguage: function(language, translations, domain) {
-            var domain = domain || '__messages';
+    /**
+     * Select a language
+     *
+     * @param string language
+     * @returns void
+     */
+    setLanguage: function(language) {
+        Translate._currentLanguage = language;
+    },
 
-            if (typeof Translate._translations[language] === 'undefined') {
-                Translate._translations[language] = {};
-            }
-            if (typeof Translate._translations[language][domain] === 'undefined') {
-                Translate._translations[language][domain] = {};
-            }
+    /**
+     * Add a language specification
+     *
+     * @param string language
+     * @param Object translations
+     * @param string domain
+     * @returns void
+     */
+    addLanguage: function(language, translations, domain) {
+        var domain = domain || '__messages';
 
-            Translate._translations[language][domain] = translations;
-        },
-
-        /**
-         * Lookup a translation
-         *
-         * @param string key
-         * @param string domain
-         * @returns String
-         */
-        lookup: function(key, domain) {
-            var domain = domain || '__messages';
-
-            return Translate._translations[Translate._currentLanguage][domain][key];
+        if (typeof Translate._translations[language] === 'undefined') {
+            Translate._translations[language] = {};
         }
-    };
-}
+        if (typeof Translate._translations[language][domain] === 'undefined') {
+            Translate._translations[language][domain] = {};
+        }
+
+        Translate._translations[language][domain] = translations;
+    },
+
+    /**
+     * Lookup a translation
+     *
+     * @param string key
+     * @param string domain
+     * @returns String
+     */
+    lookup: function(key, domain) {
+        var domain = domain || '__messages';
+
+        var translations = Translate._translations[Translate._currentLanguage] || Translate._translations[Translate._defaultLanguage];
+
+        if (typeof translations == 'undefined') {
+            return domain + '_' + key;
+        }
+        else if (domain in translations === false) {
+            return domain + '_' + key;
+        }
+
+        return translations[domain][key];
+    }
+};
