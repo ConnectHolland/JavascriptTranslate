@@ -36,6 +36,25 @@ if(typeof(Translate)=="undefined"){
         },
 
         /**
+         * Select a language using the document element
+         *
+         * @returns void
+         */
+        setLanguageFromDocument: function() {
+            var lang = document.documentElement.lang;
+            switch (lang) {
+                case 'en':
+                    lang = 'en_US';
+                case 'nl':
+                    lang = 'nl_NL';
+                case 'fr':
+                    lang = 'fr_FR';
+            }
+
+            return Translate.setLanguage(lang);
+        },
+
+        /**
          * Add a language specification
          *
          * @param string language
@@ -79,3 +98,5 @@ if(typeof(Translate)=="undefined"){
         }
     };
 }
+
+Translate.setLanguageFromDocument();
