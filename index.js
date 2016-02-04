@@ -45,10 +45,13 @@ if(typeof(Translate)=="undefined"){
             switch (lang) {
                 case 'en':
                     lang = 'en_US';
+                    break;
                 case 'nl':
                     lang = 'nl_NL';
+                    break;
                 case 'fr':
                     lang = 'fr_FR';
+                    break;
             }
 
             return Translate.setLanguage(lang);
