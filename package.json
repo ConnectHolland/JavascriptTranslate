@@ -1,6 +1,6 @@
 {
     "name": "connectholland-translate",
-    "version": "0.0.6",
+    "version": "0.0.7",
     "description": "Makes translating values in javascript easy",
     "license" : "MIT",
     "dependencies": {

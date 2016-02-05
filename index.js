@@ -79,6 +79,30 @@ if(typeof(Translate)=="undefined"){
         },
 
         /**
+         * Add multiple translations at once
+         *
+         * @param Object translations
+         * @param string domain
+         * @returns void
+         */
+        addLanguages: function(translations, domain) {
+            var translationsPerLanguage = {};
+
+            for (var lookupKey in translations) {
+                for (var language in translations[lookupKey]) {
+                    if (typeof translationsPerLanguage[language] == 'undefined') {
+                        translationsPerLanguage[language] = {};
+                    }
+                    translationsPerLanguage[language][lookupKey] = translations[lookupKey][language];
+                }
+            }
+
+            for (var language in translationsPerLanguage) {
+                Translate.addLanguage(language, translationsPerLanguage[language], domain);
+            }
+        },
+
+        /**
          * Lookup a translation
          *
          * @param string key
